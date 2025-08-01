@@ -1,0 +1,137 @@
+NOVAK_UPFLOOR/
++-- private_html/
+¦   +-- .htpasswd/
+¦       +-- .protected.list
+¦
++-- logs/
+¦   +-- Jul-2025.tar.gz
+¦   +-- Jul-2025.tar.gz.1
+¦   +-- Jul-2025.tar.gz.2
+¦   +-- Jul-2025.tar.gz.3
+¦   +-- Jul-2025.tar.gz.4
+¦
++-- awstats/
+¦   +-- awstats.pl
+¦   +-- .htaccess
+¦   +-- *.html (AWStats reports per bulan)
+¦   +-- icon/
+¦   +-- index.html
+¦   +-- lang/
+¦   +-- lib/
+¦   +-- plugins/
+¦   +-- .data/
+¦       +-- awstats.{domain}.conf
+¦       +-- awstats{bulan}.waisakaproperty.com.txt
+¦
++-- property/
+¦   +-- .env
+¦   +-- .env.example
+¦   +-- .editorconfig
+¦   +-- .gitattributes
+¦   +-- .gitignore
+¦   +-- .htaccess
+¦   +-- .htaccess.example
+¦   +-- .styleci.yml
+¦   +-- artisan
+¦   +-- AWS.code-workspace
+¦   +-- composer.json
+¦   +-- composer.lock
+¦   +-- composer.phar
+¦   +-- index.php
+¦   +-- package.json
+¦   +-- package-lock.json
+¦   +-- phpunit.xml
+¦   +-- README.md
+¦   +-- resourcesviewsemailsverification.blade.php
+¦   +-- server.php
+¦   +-- vendor.zip
+¦   +-- webpack.mix.js
+¦   ¦
+¦   +-- app/
+¦   ¦   +-- Console/
+¦   ¦   ¦   +-- Kernel.php
+¦   ¦   +-- Exceptions/
+¦   ¦   ¦   +-- Handler.php
+¦   ¦   +-- Helpers/
+¦   ¦   ¦   +-- Tanggal.php
+¦   ¦   ¦   +-- Website.php
+¦   ¦   +-- Http/
+¦   ¦   ¦   +-- Kernel.php
+¦   ¦   ¦   +-- Controllers/
+¦   ¦   ¦   ¦   +-- Home.php
+¦   ¦   ¦   ¦   +-- Berita.php
+¦   ¦   ¦   ¦   +-- Download.php
+¦   ¦   ¦   ¦   +-- Galeri.php
+¦   ¦   ¦   ¦   +-- Listing.php
+¦   ¦   ¦   ¦   +-- Login.php
+¦   ¦   ¦   ¦   +-- Video.php
+¦   ¦   ¦   ¦   +-- Admin/
+¦   ¦   ¦   ¦       +-- Agenda.php
+¦   ¦   ¦   ¦       +-- Berita.php
+¦   ¦   ¦   ¦       +-- Dasbor.php
+¦   ¦   ¦   ¦       +-- Dataset.php
+¦   ¦   ¦   ¦       +-- Download.php
+¦   ¦   ¦   ¦       +-- Galeri.php
+¦   ¦   ¦   ¦       +-- Heading.php
+¦   ¦   ¦   ¦       +-- Kategori.php
+¦   ¦   ¦   ¦       +-- Kategori_agenda.php
+¦   ¦   ¦   ¦       +-- Kategori_download.php
+¦   ¦   ¦   ¦       +-- Kategori_galeri.php
+¦   ¦   ¦   ¦       +-- Kategori_property.php
+¦   ¦   ¦   ¦       +-- Kategori_staff.php
+¦   ¦   ¦   ¦       +-- Kategori_user.php
+¦   ¦   ¦   ¦       +-- Proyek.php
+¦   ¦   ¦   ¦       +-- Property.php
+¦   ¦   ¦   ¦       +-- Rekening.php
+¦   ¦   ¦   ¦       +-- Staff.php
+¦   ¦   ¦   ¦       +-- User.php
+¦   ¦   ¦   ¦       +-- Video.php
+¦   ¦   ¦   +-- Middleware/
+¦   ¦   +-- Models/
+¦   ¦       +-- Agenda_model.php
+¦   ¦       +-- Berita_model.php
+¦   ¦       +-- Galeri_model.php
+¦   ¦       +-- Property_model.php
+¦   ¦       +-- Proyek_model.php
+¦   ¦       +-- User_model.php
+¦   ¦
+¦   +-- bootstrap/
+¦   +-- config/
+¦   +-- database/
+¦   ¦   +-- factories/
+¦   ¦   +-- migrations/
+¦   ¦   +-- seeders/
+¦   ¦
+¦   +-- public/
+¦   ¦   +-- index.php
+¦   ¦   +-- assets/
+¦   ¦       +-- admin/
+¦   ¦       +-- css/
+¦   ¦       +-- js/
+¦   ¦       +-- gambar/
+¦   ¦       +-- uploads/
+¦   ¦
+¦   +-- resources/
+¦   ¦   +-- views/
+¦   ¦       +-- layout/
+¦   ¦       ¦   +-- footer.blade.php
+¦   ¦       ¦   +-- header.blade.php
+¦   ¦       ¦   +-- wrapper.blade.php
+¦   ¦       +-- home/
+¦   ¦       +-- berita/
+¦   ¦       +-- galeri/
+¦   ¦       +-- login/
+¦   ¦       +-- admin/
+¦   ¦           +-- berita/
+¦   ¦           +-- galeri/
+¦   ¦           +-- property/
+¦   ¦           +-- proyek/
+¦   ¦           +-- user/
+¦   ¦           +-- dashboard.blade.php
+¦   ¦
+¦   +-- routes/
+¦   ¦   +-- web.php
+¦   ¦   +-- api.php
+¦   ¦
+¦   +-- storage/
+¦   +-- tests/
