@@ -2,39 +2,57 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\SubscriptionPackage;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'users';
+    protected $primaryKey = 'id_user';
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'nama',
+        'username', 
+        'email',
+        'password',
+        'package_id',
+        'ads_quota',
+        'ads_used',
+        'device_token',
+        'status',
+        'approved_by',
+        'approved_at',
+        'akses_level',
+        'gambar',
+        'kode_rahasia'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'kode_rahasia',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'approved_at' => 'datetime',
     ];
+
+    // Relationships
+    public function package()
+    {
+        return $this->belongsTo(SubscriptionPackage::class, 'package_id');
+    }
+
+    // Get ads quota from package
+    public function getAdsQuotaFromPackage()
+    {
+        if ($this->package) {
+            return $this->package->ads_quota;
+        }
+        return 100; // default quota
+    }
 }

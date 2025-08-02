@@ -45,30 +45,31 @@ class Home extends Controller
         return view('layout/wrapper',$data);
     }
 
-    public function search($tipe, Request $request)
+  // --- FUNGSI SEARCH YANG DIPERBAIKI ---
+public function search($tipe, Request $request)
     {
     	$site_config   = DB::table('konfigurasi')->first();
         $kategori_property = DB::table('kategori_property')->orderBy('urutan','ASC')->get();
-        $news           = new Berita_model();
-        $myproperty     = new Property_model();
-        $berita         = $news->home();
+        $news          = new Berita_model();
+        $myproperty    = new Property_model();
+        $berita        = $news->home();
 
         //Filter
         $id_kategori_property = $request->id_kategori_property;
-        $listing_type       = ($tipe=='jual') ? '1' : '2'; 
-        $location           = $request->location;
-        $price_from         = $request->price_from;
-        $price_to           = $request->price_to;
-        $bedrooms           = $request->bedrooms;
-        $bathrooms          = $request->bathrooms;
-        $landsize_from      = $request->landsize_from;
-        $landsize_to        = $request->landsize_to;
-        $buildingsize_from  = $request->buildingsize_from;
-        $buildingsize_to    = $request->buildingsize_to;
-        $certificates       = $request->certificates;
-        $limit              = ($request->limit) ? $request->limit : '9';
-        $order              = ($request->order) ? $request->order : 'newest';
-       
+        $listing_type         = ($tipe=='jual') ? '1' : '2'; 
+        $location             = $request->location;
+        $price_from           = $request->price_from;
+        $price_to             = $request->price_to;
+        $bedrooms             = $request->bedrooms;
+        $bathrooms            = $request->bathrooms;
+        $landsize_from        = $request->landsize_from;
+        $landsize_to          = $request->landsize_to;
+        $buildingsize_from    = $request->buildingsize_from;
+        $buildingsize_to      = $request->buildingsize_to;
+        $certificates         = $request->certificates;
+        $limit                = ($request->limit) ? $request->limit : '9';
+        $order                = ($request->order) ? $request->order : 'newest';
+        
         switch ($order) {
             case 'newest':
                 $orderData = 'property_db.tanggal desc';
@@ -81,13 +82,13 @@ class Home extends Controller
                 break;
             default:
                 $orderData = 'property_db.tanggal';
-          }
+        }
 
         $priceArray = [50000000,100000000,500000000,1000000000,3000000000,5000000000,7000000000,10000000000,15000000000,20000000000,30000000000,50000000000,75000000000,100000000000];
-        $bedroomArray   = [1,2,3,4];
+        $bedroomArray     = [1,2,3,4];
         $bathroomsArray = [1,2,3,4,5,6];
         $certificatesArray = ['SHM' => 'SHM - Sertifikat Hak Milik','HGB' => 'HGB - Hak Guna Bangunan','other' => 'Lainnya (PPJB, Girik, Adat, dll)'];
-        $limit          = $limit;
+        $limit            = $limit;
 
         $where = array(
             'property_db.tipe' => $tipe,
@@ -100,13 +101,11 @@ class Home extends Controller
                 $kecamatan = strtolower($item[0]);
                 $kabupaten = strtolower($item[1]);
                 $provinsi = strtolower($item[2]);
-
                 $whereRaw = " (LOWER(kecamatan.nama) LIKE '%".$kecamatan."%' AND LOWER(kabupaten.nama) LIKE '%".$kabupaten."%' AND LOWER(provinsi.nama) LIKE '%".$provinsi."%') ";
             }
             else if(count($item) == 2 ) {
                 $kabupaten = $item[0];
                 $provinsi = $item[1];
-
                 $whereRaw = " (LOWER(kabupaten.nama) LIKE '%".$kabupaten."%' AND LOWER(provinsi.nama) LIKE '%".$provinsi."%') ";
             }
             else if(count($item) == 1 ) {
@@ -119,9 +118,20 @@ class Home extends Controller
         if($id_kategori_property != '') {
             $property->where('property_db.id_kategori_property',$id_kategori_property);
         }
-        if($price_from > 0 && $price_to > 0) {
+
+        // --- BLOK PERBAIKAN LOGIKA HARGA ---
+        if($price_from != '' && $price_to != '') {
+            // Jika keduanya diisi, gunakan whereBetween
             $property->whereBetween('property_db.harga', [$price_from, $price_to]);
+        } elseif ($price_from != '') {
+            // Jika hanya minimal yang diisi
+            $property->where('property_db.harga', '>=', $price_from);
+        } elseif ($price_to != '') {
+            // Jika hanya maksimal yang diisi
+            $property->where('property_db.harga', '<=', $price_to);
         }
+        // --- AKHIR BLOK PERBAIKAN ---
+
         if($bedrooms != '') {
             if($bedrooms != '5+') {
                 $property->where('property_db.kamar_tidur',$bedrooms);
@@ -260,6 +270,9 @@ class Home extends Controller
 
     public function properti($id_property)
     {
+
+        DB::table('properti')->where('id_property', $id_property)->increment('view_count');
+
         $site_config    = DB::table('konfigurasi')->first();
         
         $myproperty     = new Property_model();
